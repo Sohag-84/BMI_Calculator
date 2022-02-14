@@ -15,14 +15,19 @@ class InputApp extends StatefulWidget {
   _InputAppState createState() => _InputAppState();
 }
 
+// it helps us to read code easily
+enum Gender{
+  male,
+  female,
+}
+
 class _InputAppState extends State<InputApp> {
 
   Color maleCardColor = inActiveCardColor;
   Color femaleCardColor = inActiveCardColor;
 
-  // male = 1 and female = 2;
-  void checkActivity(int gender){
-    if(gender == 1){//male button is pressed
+  void checkActivity(Gender gender){
+    if(gender == Gender.male){//male button is pressed
       if(maleCardColor == inActiveCardColor){
         maleCardColor = activeCardColor;
         femaleCardColor = inActiveCardColor;
@@ -30,7 +35,7 @@ class _InputAppState extends State<InputApp> {
         maleCardColor = inActiveCardColor;
         femaleCardColor = activeCardColor;
       }
-    }else if(gender == 2){ //that means female button is pressed
+    }else if(gender == Gender.female){ //that means female button is pressed
       if(femaleCardColor == inActiveCardColor){
         femaleCardColor = activeCardColor;
         maleCardColor = inActiveCardColor;
@@ -58,7 +63,7 @@ class _InputAppState extends State<InputApp> {
                   child: GestureDetector(
                     onTap: (){
                       setState(() {
-                        checkActivity(1);
+                        checkActivity(Gender.male);
                       });
                     },
                     child: ReusableCard(
@@ -73,7 +78,7 @@ class _InputAppState extends State<InputApp> {
                     onTap: (){
                       setState(() {
 
-                        checkActivity(2);
+                        checkActivity(Gender.female);
 
                       });
                     },
