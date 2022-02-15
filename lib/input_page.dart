@@ -8,6 +8,9 @@ const inActiveCardColor = Color(0xFF111328);
 const bottomContainerHeight = 80.0;
 const bottomContainerColor = Color(0xFFEA1556);
 
+const numberTextStyle = TextStyle(
+    fontSize: 50,fontWeight: FontWeight.w900
+);
 
 // it helps us to read code easily
 enum Gender{
@@ -45,6 +48,7 @@ class _InputAppState extends State<InputApp> {
   //   }
   // }
   Gender? selectedGender= null;
+  int height = 180;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +59,7 @@ class _InputAppState extends State<InputApp> {
           backgroundColor: const Color(0xFF12153B),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch, //for use full size of widget
           children: [
             Expanded(
                 child: Row(
@@ -100,14 +105,36 @@ class _InputAppState extends State<InputApp> {
               Expanded(
               child: ReusableCard(
                   colour: activeCardColor,
-                cardChild: Column(
-                  children: const[
-                    Icon(
-                      FontAwesomeIcons.female,
-                      size: 20,
-                    )
-                  ],
-                ),
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:  [
+                      const Text("HEIGHT",
+                      style: labelTextStyle,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children:  [
+                          Text(height.toString(),
+                            style: numberTextStyle
+                          ),
+                          const Text("cm",style: labelTextStyle,)
+                        ],
+                      ),
+                      Slider(
+                          value: height.toDouble(), //this height when we open the app this time show
+                          min: 80,
+                          max: 320,
+                          activeColor: const Color(0xFFD0D1D9),
+                          inactiveColor: const Color(0xFF878895),
+                        onChanged: (double newValue){
+                            setState(() {
+                              height = newValue.round();
+                            });
+                        },
+                      )
+                    ],
+                  )
               ),
             ),
             Expanded(
