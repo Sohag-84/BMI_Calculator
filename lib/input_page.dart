@@ -121,17 +121,25 @@ class _InputAppState extends State<InputApp> {
                           const Text("cm",style: labelTextStyle,)
                         ],
                       ),
-                      Slider(
-                          value: height.toDouble(), //this height when we open the app this time show
-                          min: 80,
-                          max: 320,
-                          activeColor: const Color(0xFFD0D1D9),
-                          inactiveColor: const Color(0xFF878895),
-                        onChanged: (double newValue){
-                            setState(() {
-                              height = newValue.round();
-                            });
-                        },
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: const Color(0xFFD0D1D9),
+                          overlayColor: const Color(0x1fEB2D67),
+                          thumbColor: Colors.pink,
+                          thumbShape: const RoundSliderThumbShape(disabledThumbRadius: 18,elevation: 10),
+                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 30)
+                        ),
+                        child: Slider(
+                            value: height.toDouble(), //this height when we open the app this time show
+                            min: 80,
+                            max: 320,
+                            inactiveColor: const Color(0xFF878895),
+                          onChanged: (double newValue){
+                              setState(() {
+                                height = newValue.round();
+                              });
+                          },
+                        ),
                       )
                     ],
                   )
