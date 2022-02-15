@@ -10,6 +10,7 @@ class ResultPage extends StatelessWidget {
         title: const Text("BMI CALCULATOR"),
         centerTitle: true,
       ),
+      body: const Text("Hello, this is result page"),
     );
   }
 }

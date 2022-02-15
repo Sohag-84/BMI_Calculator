@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
+import 'result_page.dart';
 
 const activeCardColor = Color(0xFF1D1E33);
 const inActiveCardColor = Color(0xFF111328);
@@ -49,6 +50,8 @@ class _InputAppState extends State<InputApp> {
   // }
   Gender? selectedGender= null;
   int height = 180;
+  int age = 20;
+  int weight = 60;
 
   @override
   Widget build(BuildContext context) {
@@ -126,8 +129,8 @@ class _InputAppState extends State<InputApp> {
                           activeTrackColor: const Color(0xFFD0D1D9),
                           overlayColor: const Color(0x1fEB2D67),
                           thumbColor: Colors.pink,
-                          thumbShape: const RoundSliderThumbShape(disabledThumbRadius: 18,elevation: 10),
-                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 30)
+                          thumbShape: const RoundSliderThumbShape(disabledThumbRadius: 14,elevation: 10),
+                          //overlayShape: const RoundSliderOverlayShape(overlayRadius: 30)
                         ),
                         child: Slider(
                             value: height.toDouble(), //this height when we open the app this time show
@@ -148,42 +151,136 @@ class _InputAppState extends State<InputApp> {
             Expanded(
                 child: Row(
               children:   [
-                Expanded(child: ReusableCard(
+                Expanded(
+                    child: ReusableCard(
                     colour: activeCardColor,
                   cardChild: Column(
-                    children: const[
-                      Icon(
-                        FontAwesomeIcons.female,
-                        size: 20,
-                      )
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                       const Text("WEIGHT",
+                        style: labelTextStyle,
+                      ),
+                      Text(
+                        weight.toString(),
+                        style: numberTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RawMaterialButton(
+                            child:  const Icon(FontAwesomeIcons.plus,size: 20,),
+                              onPressed: (){
+                              setState(() {
+                                weight++;
+                              });
+                          },
+                            shape: const CircleBorder(),
+                            constraints: const BoxConstraints.tightFor(
+                              width: 49,
+                              height: 49,
+                            ),
+                          ),
+
+                          const SizedBox(
+                            width: 12,
+                          ),
+
+                          RawMaterialButton(
+                            child:  const Icon(FontAwesomeIcons.minus,size: 20,),
+                              onPressed: (){
+                              setState(() {
+                                weight--;
+                              });
+                          },
+                            shape: const CircleBorder(),
+                            fillColor: const Color(0xFF1C2033),
+                            constraints: const BoxConstraints.tightFor(
+                              width: 49,
+                              height: 49,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 )
                 ),
                 Expanded(child: ReusableCard(
-                    colour: activeCardColor,
+                  colour: activeCardColor,
                   cardChild: Column(
-                    children: const[
-                      Icon(
-                        FontAwesomeIcons.female,
-                        size: 20,
-                      )
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("AGE",
+                        style: labelTextStyle,
+                      ),
+                      Text(
+                        age.toString(),
+                        style: numberTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                            RawMaterialButton(
+                              child: const Icon(FontAwesomeIcons.plus,size: 20,),
+                                shape: const CircleBorder(),
+                                fillColor: const Color(0xFF1C2033),
+                                constraints: const BoxConstraints.tightFor(
+                                  width: 49,
+                                  height:49
+                                ),
+                                onPressed: (){
+                                setState(() {
+                                  age++;
+                                });
+                            }
+                          ),
+
+                          const SizedBox(
+                            width: 12,
+                          ),
+
+                          RawMaterialButton(
+                            child: const Icon(FontAwesomeIcons.minus,size: 20,),
+                              shape: const CircleBorder(),
+                              fillColor: const Color(0xFF1C2033),
+                              constraints: const BoxConstraints.tightFor(
+                                width: 49,
+                                height: 49,
+                              ),
+                              onPressed: (){
+                              setState(() {
+                                age--;
+                              });
+                              }
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 )
                 ),
               ],
             )),
-            Container(
-              width: double.infinity,
-              height: bottomContainerHeight,
-              color: bottomContainerColor,
-              child: const Center(child: Text("CALCULATE YOUR BMI",
-                style: TextStyle(
-                    color: Colors.white,
-                  letterSpacing: 2
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context){
+                      return const ResultPage();
+                    }
+                    )
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                height: bottomContainerHeight,
+                color: bottomContainerColor,
+                child: const Center(child: Text("CALCULATE YOUR BMI",
+                  style: TextStyle(
+                      color: Colors.white,
+                    letterSpacing: 2
+                  ),
+                )
                 ),
-              )
               ),
             )
           ],
