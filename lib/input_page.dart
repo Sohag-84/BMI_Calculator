@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
 import 'result_page.dart';
+import 'bmi-calculation.dart';
 
 const activeCardColor = Color(0xFF1D1E33);
 const inActiveCardColor = Color(0xFF111328);
@@ -48,7 +49,8 @@ class _InputAppState extends State<InputApp> {
   //     }
   //   }
   // }
-  Gender? selectedGender= null;
+  //Gender? selectedGender= null;
+  Gender? selectedGender;
   int height = 180;
   int age = 20;
   int weight = 60;
@@ -263,9 +265,16 @@ class _InputAppState extends State<InputApp> {
             )),
             GestureDetector(
               onTap: (){
+
+                Calculator calculator = Calculator(weight, height);
+
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context){
-                      return const ResultPage();
+                      return ResultPage(
+                        bmiResult: calculator.bmiCalculate(),
+                        resultText: calculator.getBmiResult(),
+                        adviceText: calculator.getAdvice(),
+                      );
                     }
                     )
                 );
