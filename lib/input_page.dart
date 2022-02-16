@@ -277,6 +277,7 @@ class _InputAppState extends State<InputApp> {
                 child: const Center(child: Text("CALCULATE YOUR BMI",
                   style: TextStyle(
                       color: Colors.white,
+                    fontWeight: FontWeight.bold,
                     letterSpacing: 2
                   ),
                 )
